@@ -23,7 +23,7 @@
 # executed from 'project/build' with 'cmake ../'.
 cmake_minimum_required(VERSION 2.6)
 
-project(types-base)
+project(base)
 
 #message(STATUS "Running install-asn-types.sh script")
 
