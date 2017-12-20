@@ -92,12 +92,13 @@ set(ASN1SCC_TEST
 # Get generated .c files 
 file(GLOB C_FILES "${ASN1_OUT_DIR}/*.c")
 
-set(SOURCES "")
-
+# Build list of sources excluding the files generated for unit tests (-atc)
 foreach(cFile ${C_FILES})
     get_filename_component(fName ${cFile} NAME)
-    if(NOT ${fName} IN_LIST ASN1SCC_COMMON AND NOT ${fName} IN_LIST ASN1SCC_TEST)
-        list(APPEND SOURCES ${cFile})
+    if(NOT ${ASN1_OUT_DIR}/${fName} IN_LIST ASN1SCC_COMMON 
+       AND NOT ${ASN1_OUT_DIR}/${fName} IN_LIST ASN1SCC_TEST 
+       AND NOT ${fName} MATCHES "^.*_auto_tcs.c$")
+            list(APPEND SOURCES ${cFile})
     endif()
 endforeach()
 
@@ -114,8 +115,7 @@ set_target_properties(esrocos_types_asn1common PROPERTIES POSITION_INDEPENDENT_C
 add_dependencies(esrocos_types_asn1common esrocos_types_base_generate_c)
 
 # Unit tests executable
-add_executable(test_esrocos_types_base ${ASN1_OUT_DIR}/mainprogram.c ${ASN1_OUT_DIR}/testsuite.c)
-target_link_libraries(test_esrocos_types_base esrocos_types_base esrocos_types_asn1common)
+add_executable(test_esrocos_types_base ${C_FILES})
 
 # Install headers and libraries
 install(DIRECTORY ${ASN1_OUT_DIR}
