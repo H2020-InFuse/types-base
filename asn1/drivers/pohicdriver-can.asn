@@ -1,0 +1,63 @@
+-- =====================================================================
+--  FILE:  $URL$
+-- =====================================================================
+--  PROJECT:             :  SARGON
+--  VERSION              :  $Revision$
+--  LANGUAGE             :  ASN.1
+--  AUTHOR               :  $LastChangedBy$ 
+--  COPYRIGHT            :  AVOS - GMV,S.A.
+--  COMPILER             :  asn2aadlPlus
+--  CREATED              :  $CreationDate$
+--  CLASS                :  -
+--  LAST MODIFIED        :  $LastChangedDate$
+--  GENERATED FROM MODEL :  -
+--  ORIGINAL MODEL AUTHOR:  -
+-- ---------------------------------------------------------------------
+--  ASN.1 type definitions for the CANOpen bus configuration.
+-- ---------------------------------------------------------------------
+--  HISTORY
+--  $History$
+-- =====================================================================
+
+POHICDRIVER-CAN DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+-- Definitions of message CAN formats default ids
+
+CanPath-T ::= IA5String (SIZE (1 .. 100))
+
+-- Channel A id 0, Channel B is 1
+Channel-T ::= INTEGER (0 .. 1)
+Scale-T ::= INTEGER (0 .. 15)
+
+------------------------------------------
+-- LOW LEVEL CONFIGURATION (DRIVER) Supported
+------------------------------------------
+Can-Conf-T ::= SEQUENCE {
+   driver-path CanPath-T,
+   channel     Channel-T,
+   -- Timing setting baud rate 250k @ 40MHz
+   scaler      Scale-T,
+   ps1         Scale-T,
+   ps2         Scale-T,
+   rsj         Scale-T,
+   bpr         Scale-T,
+   -- Set transmission and reception blocking
+   tx-block    Channel-T,
+   rx-block    Channel-T
+}
+
+channel-A Can-Conf-T ::= {
+   driver-path "/dev/grcan0",
+   channel 0,
+
+   scaler  7,
+   ps1 15,
+   ps2 3,
+   rsj 1,
+   bpr 0,
+
+   tx-block 1,
+   rx-block 1
+}
+
+END

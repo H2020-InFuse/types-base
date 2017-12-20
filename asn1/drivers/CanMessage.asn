@@ -1,0 +1,38 @@
+--!  Date/time of generation: 2017/01/04 00:43:06
+----------------------------------------------------------------
+CanMessage-Types DEFINITIONS ::=
+BEGIN
+IMPORTS T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean  FROM TASTE-BasicTypes 
+T-Int64, T-UInt16, T-Double, T-Float, T-UInt64, T-String FROM TASTE-ExtendedTypes 
+Time FROM Time-Types;
+
+
+--- Definition of DRIVER_TYPE Starts 
+--Driver-Type ::= 
+--CHOICE
+--{
+    
+--}  
+
+size-of-data T-UInt8 ::= 8
+---  Definition MESSAGE Starts    
+Message   ::= 
+SEQUENCE
+{
+    base-time                    Time,        --Timestamp
+    can-time                Time,
+    can-id                  T-UInt32,                
+    data                    SEQUENCE (SIZE(0..size-of-data)) OF T-UInt8,    
+    size-can                T-UInt8                               
+}
+
+Status ::=
+SEQUENCE
+{
+    base-time                    Time,
+    error-can                   T-UInt8
+}
+
+
+---  Definition MESSAGE Ends 
+END

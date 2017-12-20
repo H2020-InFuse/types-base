@@ -1,0 +1,95 @@
+-- =====================================================================
+--  FILE:  $URL$
+-- =====================================================================
+--  PROJECT:             :  SARGON
+--  VERSION              :  $Revision$
+--  LANGUAGE             :  ASN.1
+--  AUTHOR               :  $LastChangedBy$ 
+--  COPYRIGHT            :  AVOS - GMV,S.A.
+--  COMPILER             :  asn2aadlPlus
+--  CREATED              :  $CreationDate$
+--  CLASS                :  -
+--  LAST MODIFIED        :  $LastChangedDate$
+--  GENERATED FROM MODEL :  -
+--  ORIGINAL MODEL AUTHOR:  -
+-- ---------------------------------------------------------------------
+--  ASN.1 type definitions for the CANOpen bus.
+-- ---------------------------------------------------------------------
+--  HISTORY
+--  $History$
+-- =====================================================================
+
+CanOpen-Types DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+IMPORTS 
+T-UInt32 FROM TASTE-BasicTypes;
+
+CanMsg-T ::= OCTET STRING (SIZE (1 .. 16))
+
+-- Can Open Msg type
+Can-MsgType-T ::= SEQUENCE {
+   nmt        T-UInt32, -- CanID for NMT messages 
+   sync       T-UInt32, -- CanID for SYNC messages
+   timestamp  T-UInt32, -- CanID for TIMESTAMP messages
+   emcy       T-UInt32  -- CanID for EMCU messages
+}
+
+-- CAn Open Base CanID for...
+Can-BaseId-T ::= SEQUENCE {
+   tx-pd-01         T-UInt32,
+   rx-pd-01         T-UInt32,
+   tx-pd-02         T-UInt32,
+   rx-pd-02         T-UInt32,
+   tx-pd-03         T-UInt32,
+   rx-pd-03         T-UInt32,
+   tx-pd-04         T-UInt32,
+   rx-pd-04         T-UInt32,
+   tx-sdo           T-UInt32,
+   rx-sdo           T-UInt32,
+   error-control    T-UInt32
+}
+
+-- Can Open Nmt and other Definitions type
+Can-Defs-T ::= SEQUENCE {
+   nmt-start        T-UInt32, -- Definition for Network Start command inside a NMT message
+   nmt-stop         T-UInt32, -- Definition for Stop Network command inside a NMT message
+   nmt-preop        T-UInt32, -- Definition for entering Pre-Operational state command inside 
+                              -- a NMT message 
+   nmt-sw-reset     T-UInt32, -- Definition for Software Reset command inside a NMT message 
+   nmt-comms-reset  T-UInt32, -- Definition for Communications Reset command inside a NMT 
+                              -- message
+   watchdog-timeout T-UInt32  -- CAN heartbeat control. Time limit in seconds to consider the 
+                              -- drive entered a faulty or irresponsive state
+}
+
+can-open-msg-type Can-MsgType-T ::= {
+   nmt		      0,     -- '00'H, 
+   sync		    128,     -- '80'H,
+   timestamp	256,     -- '100'H,
+   emcy		    128      -- EMCY is 80H + NodeID
+}
+
+can-open-base-id Can-BaseId-T ::= {
+   tx-pd-01       384, -- '180'H,
+   rx-pd-01       512, -- '200'H,
+   tx-pd-02       640, -- '280'H,
+   rx-pd-02       768, -- '300'H,
+   tx-pd-03       896, -- '380'H,
+   rx-pd-03      1024, -- '400'H,
+   tx-pd-04      1152, -- '480'H,
+   rx-pd-04      1280, -- '500'H,
+   tx-sdo        1408, -- '580'H,
+   rx-sdo        1536, -- '600'H,
+   error-control 1792  -- '700'H
+}
+
+can-open-defs Can-Defs-T ::= {
+   nmt-start          1, -- 01'H,
+   nmt-stop           2, --'02'H,
+   nmt-preop        128, --'80'H,
+   nmt-sw-reset     129, --'81'H,
+   nmt-comms-reset  130, --'82'H,
+   watchdog-timeout  10
+}
+
+END

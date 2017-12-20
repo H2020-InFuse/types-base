@@ -1,0 +1,29 @@
+TimestampEstimatorStatus-Types DEFINITIONS ::=
+BEGIN
+IMPORTS T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean  FROM TASTE-BasicTypes 
+T-Int64, T-UInt16, T-Double, T-Float, T-UInt64, T-String FROM TASTE-ExtendedTypes 
+Time FROM Time-Types;
+
+
+---  Definition TIMESTAMPESTIMATORESTATUS Starts 
+
+TimestampEstimatorStatus   ::= 
+SEQUENCE
+{
+    stamp				    Time,       -- When this data structure has been generated
+    period                  Time,       -- Estimated period
+    latency                 Time,       -- Estimated latency (always null if no hardware timestamps are provided)
+    time-raw                Time,       -- Last input time provided to the input estimator
+    reference-time-raw      Time,       -- Last reference time provided to the input estimator
+    lost-samples-total      T-Int32,    -- Total count of lost samples
+    lost-samples            T-Int32,    -- Count of lost samples currently stored in the estimator
+    window-size             T-Int32,    -- Count of samples currently stored in the estimator
+    window-capacity         T-Int32,    -- Maximum window capacity
+    base-time               Time,       -- Time at which the base time got reset last
+    base-time-reset-offset  Time,       -- Offset at the last reset of base-time
+    expected-losses         T-Int32,    -- Losses that have been announced using updateLoss, but have yet to be seen in the time stream
+    rejected-expected-losses T-Int32    -- The number of losses announced with updateLoss that got rejected by the estimator
+}
+
+---  Definition TIMESTAMPESTIMATORESTATUS Ends 
+END
