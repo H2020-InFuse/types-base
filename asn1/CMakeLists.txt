@@ -1,3 +1,7 @@
+# H2020 ESROCOS Project
+# Company: GMV Aerospace & Defence S.A.U.
+# Licence: GPLv2
+
 set(ASN1
     ${CMAKE_CURRENT_SOURCE_DIR}/base/Angle.asn
     ${CMAKE_CURRENT_SOURCE_DIR}/base/BodyState.asn
@@ -48,22 +52,29 @@ set(ASN1
 
 set(ASN1_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-execute_process(
-    COMMAND asn1.exe -c -typePrefix asn1Scc -uPER -wordSize 8 -ACN -o ${ASN1_OUT_DIR} -atc ${ASN1}
-    RESULT_VARIABLE ASN1SCC_RESULT
-)
+set(STAMP_FILE ${CMAKE_CURRENT_BINARY_DIR}/timestamp)
 
-if(${ASN1SCC_RESULT} EQUAL 0)
-    message(STATUS "ASN.1 first compilation successful.")
-else()
-    message(FATAL_ERROR "ASN.1 first compilation failed.")
+if(NOT EXISTS ${STAMP_FILE})
+    execute_process(
+        COMMAND asn1.exe -c -typePrefix asn1Scc -uPER -wordSize 8 -ACN -o ${ASN1_OUT_DIR} -atc ${ASN1}
+        RESULT_VARIABLE ASN1SCC_RESULT
+    )
+
+    if(${ASN1SCC_RESULT} EQUAL 0)
+        execute_process(
+            COMMAND ${CMAKE_COMMAND} -E touch ${STAMP_FILE}
+        )
+        message(STATUS "ASN.1 first compilation successful.")
+    else()
+        message(FATAL_ERROR "ASN.1 first compilation failed.")
+    endif()
 endif()
 
 
 # Command for C compilation; creates timestamp file
-add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/asn1-stamp
+add_custom_command(OUTPUT ${STAMP_FILE}
     COMMAND asn1.exe -c -typePrefix asn1Scc -uPER -wordSize 8 -ACN -o ${ASN1_OUT_DIR} -atc ${ASN1}
-    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/pus-asn1-stamp
+    COMMAND ${CMAKE_COMMAND} -E touch ${STAMP_FILE}
     DEPENDS ${ASN1}
     COMMENT "Generate header files for: ${ASN1} in ${ASN1_OUT_DIR}"
 )
@@ -72,7 +83,7 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/asn1-stamp
 # Target for C compilation; uses stamp file to run dependent targets only if changed
 add_custom_target(
     esrocos_types_base_generate_c
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/asn1-stamp
+    DEPENDS ${STAMP_FILE}
 )
 
 # Common files created by the ASN.1 compiler
@@ -102,24 +113,34 @@ foreach(cFile ${C_FILES})
     endif()
 endforeach()
 
-# Define the types library
-add_library(esrocos_types_base STATIC ${SOURCES})
+# Define the types library (static)
+add_library(esrocos_types_base_static STATIC ${SOURCES})
+set_target_properties(esrocos_types_base_static PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(esrocos_types_base_static PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+add_dependencies(esrocos_types_base_static esrocos_types_base_generate_c)
+
+# Create a library with the common .c files (static)
+add_library(esrocos_types_asn1common_static STATIC ${ASN1SCC_COMMON})
+set_target_properties(esrocos_types_asn1common_static PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(esrocos_types_asn1common_static PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+add_dependencies(esrocos_types_asn1common_static esrocos_types_base_generate_c)
+
+# Define the types library (dynamic)
+add_library(esrocos_types_base SHARED ${SOURCES})
 set_target_properties(esrocos_types_base PROPERTIES LINKER_LANGUAGE C)
-set_target_properties(esrocos_types_base PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 add_dependencies(esrocos_types_base esrocos_types_base_generate_c)
 
-# Create a library with the common .c files
-add_library(esrocos_types_asn1common STATIC ${ASN1SCC_COMMON})
+# Create a library with the common .c files (dynamic)
+add_library(esrocos_types_asn1common SHARED ${ASN1SCC_COMMON})
 set_target_properties(esrocos_types_asn1common PROPERTIES LINKER_LANGUAGE C)
-set_target_properties(esrocos_types_asn1common PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 add_dependencies(esrocos_types_asn1common esrocos_types_base_generate_c)
 
 # Unit tests executable
 add_executable(test_esrocos_types_base ${C_FILES})
 
-# Install headers and libraries
+# Install headers, libraries and pkg-config file
 install(DIRECTORY ${ASN1_OUT_DIR}
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/types/${CMAKE_PROJECT_NAME}
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${CMAKE_PROJECT_NAME}
         FILES_MATCHING
         PATTERN "*.h"
         PATTERN "*_auto_tcs.h" EXCLUDE
@@ -128,3 +149,13 @@ install(DIRECTORY ${ASN1_OUT_DIR}
         
 install(TARGETS esrocos_types_base esrocos_types_asn1common
         DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+CONFIGURE_FILE("esrocos_types_base.pc.in" "esrocos_types_base.pc" @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/esrocos_types_base.pc
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
+        )
+
+CONFIGURE_FILE("esrocos_types_asn1common.pc.in" "esrocos_types_asn1common.pc" @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/esrocos_types_asn1common.pc
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
+        )
