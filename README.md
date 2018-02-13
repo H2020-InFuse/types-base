@@ -9,4 +9,4 @@ GPLv2
 
 Installation
 ------------
-From the build directory, run cmake .., then make.
+From the build directory, run cmake .. -DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX_PATH, then make.
