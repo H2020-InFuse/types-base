@@ -2,7 +2,8 @@ TASTE-ExtendedTypes DEFINITIONS ::=
 BEGIN
 
 IMPORTS 
-T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean  FROM TASTE-BasicTypes;
+T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean  FROM TASTE-BasicTypes
+numT-String, Dummy-T FROM UserDefs-Types;
 
 -- Set of TASTE predefined basic types
 
@@ -18,12 +19,12 @@ T-UInt64 ::= INTEGER (0..9223372036854775807)
 
 T-Int64 ::= INTEGER (-9223372036854775807.. 9223372036854775807)
 
--- Maximum string size
-maxSize-T-String T-UInt32 ::= 256
+T-String ::= T-StringP{numT-String}
 
-T-String ::= OCTET STRING (SIZE(0..maxSize-T-String))
+T-StringP{T-UInt32: maxT-String} ::= OCTET STRING (SIZE(0..maxT-String))
 
-T-StringN{INTEGER: size} ::= OCTET STRING (SIZE(0..size))
-
+-- Dummy Type for including UserDefs-Types
+Dummy3T ::= Dummy-T
+  
 END
 

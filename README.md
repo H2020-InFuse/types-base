@@ -1,6 +1,6 @@
-types/base
+types/base_generated
 ==========
-Robotics data types in ASN.1, both manually defined and generated 
+Robotics data types in ASN.1, automatically defined and generated 
 from Rock base types.
 
 License
