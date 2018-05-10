@@ -4,7 +4,7 @@ BEGIN
 IMPORTS T-UInt32 FROM TASTE-BasicTypes;
 
 --Definition Dummy-T starts
-    Dummy-T ::= INTEGER
+    Dummy-T ::= T-UInt32
 -- Definition Dummy-T ends
 
 --Definition numT-String starts
