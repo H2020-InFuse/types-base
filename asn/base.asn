@@ -1,7 +1,7 @@
 Base-Types DEFINITIONS ::=
 BEGIN
 
-IMPORTS T-UInt32, T-UInt8, T-Boolean, T-Int32 FROM TASTE-BasicTypes T-Double, T-Float, T-Int64, T-UInt16, T-String FROM TASTE-ExtendedTypes Dummy-T, numBase-JointTrajectory, numStd-orogen-typekits-mtype-std-vector-base-JointTransform, numStd-orogen-typekits-mtype-std-vector-base-Waypoint, numStd-orogen-typekits-mtype-std-vector-base-Wrench, numStd-vector-Wrappers-Vector4d, numStd-orogen-typekits-mtype-std-vector-base-Trajectory, numBase-JointLimits-names, numBase-JointLimits-elements, numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times, numBase-NamedVector-Base-JointLimitRange-names, numBase-NamedVector-Base-JointLimitRange-elements, numBase-NamedVector-Base-JointState-names, numBase-NamedVector-Base-Wrench-names, numBase-NamedVector-Base-Wrench-elements, numBase-NamedVector-Base-JointTrajectory-names, numBase-NamedVector-Base-JointTrajectory-elements, numBase-samples-DepthMap-timestamps, numBase-samples-DepthMap-vertical-interval, numBase-samples-DepthMap-horizontal-interval, numBase-samples-DepthMap-distances, numBase-samples-DepthMap-remissions, numBase-samples-DistanceImage-data, numBase-commands-Joints-names, numBase-samples-LaserScan-ranges, numBase-samples-LaserScan-remission, numBase-samples-Pointcloud-points, numBase-samples-Pointcloud-colors, numBase-samples-Sonar-timestamps, numBase-samples-Sonar-bearings, numBase-samples-Sonar-bins, numBase-samples-SonarBeam-beam, numBase-samples-SonarScan-data, numBase-samples-SonarScan-time-beams, numBase-samples-Wrenches-names, numBase-samples-Wrenches-elements, numBase-JointTransformVector-names, numBase-JointTransformVector-elements, numBase-NamedVector-Base-JointTransform-names, numBase-NamedVector-Base-JointTransform-elements, numBase-samples-frame-Frame-image, numBase-samples-frame-Frame-attributes, numWrappers-MatrixXd-data, numWrappers-VectorXd-data, numBase-JointTransformVector-m-names, numBase-NamedVector-base-JointTransform-m-names, numBase-NamedVector-base-Wrench-m-names, numBase-samples-Pointcloud-m-points, numBase-samples-Pointcloud-m-colors, numBase-samples-Wrenches-m-names, numWrappers-geometry-Spline-knots, numWrappers-geometry-Spline-vertices, numT-String FROM UserDefs-Types;
+IMPORTS Dummy-T, numBase-JointTrajectory, numStd-orogen-typekits-mtype-std-vector-base-JointTransform, numStd-orogen-typekits-mtype-std-vector-base-Waypoint, numStd-orogen-typekits-mtype-std-vector-base-Wrench, numStd-vector-Wrappers-Vector4d, numStd-orogen-typekits-mtype-std-vector-base-Trajectory, numBase-JointLimits-names, numBase-JointLimits-elements, numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times-t, numBase-NamedVector-Base-JointLimitRange-names, numBase-NamedVector-Base-JointLimitRange-elements, numBase-NamedVector-Base-JointState-names, numBase-NamedVector-Base-Wrench-names, numBase-NamedVector-Base-Wrench-elements, numBase-NamedVector-Base-JointTrajectory-names, numBase-NamedVector-Base-JointTrajectory-elements, numBase-samples-DepthMap-timestamps, numBase-samples-DepthMap-vertical-interval, numBase-samples-DepthMap-horizontal-interval, numBase-samples-DepthMap-distances, numBase-samples-DepthMap-remissions, numBase-samples-DistanceImage-data, numBase-commands-Joints-names, numBase-samples-LaserScan-ranges, numBase-samples-LaserScan-remission, numBase-samples-Pointcloud-points, numBase-samples-Pointcloud-colors, numBase-samples-Sonar-timestamps, numBase-samples-Sonar-bearings, numBase-samples-Sonar-bins, numBase-samples-SonarBeam-beam, numBase-samples-SonarScan-data, numBase-samples-SonarScan-time-beams, numBase-samples-Wrenches-names, numBase-samples-Wrenches-elements, numBase-JointTransformVector-names, numBase-JointTransformVector-elements, numBase-NamedVector-Base-JointTransform-names, numBase-NamedVector-Base-JointTransform-elements, numBase-samples-frame-Frame-image, numBase-samples-frame-Frame-attributes, numWrappers-MatrixXd-data, numWrappers-VectorXd-data, numBase-JointTransformVector-m-names, numBase-NamedVector-base-JointTransform-m-names, numBase-NamedVector-base-Wrench-m-names, numBase-samples-Pointcloud-m-points, numBase-samples-Pointcloud-m-colors, numBase-samples-Wrenches-m-names, numWrappers-geometry-Spline-knots, numWrappers-geometry-Spline-vertices, numT-String FROM UserDefs-Types T-UInt32, T-UInt8, T-Boolean, T-Int32 FROM TASTE-BasicTypes T-Double, T-Float, T-Int64, T-UInt16, T-String FROM TASTE-ExtendedTypes;
 
 --Definition Dummy2-T starts
     Dummy2-T ::= Dummy-T
@@ -413,16 +413,16 @@ Base-JointTransform ::= SEQUENCE
 -- Definition Base-JointTransform ends
 
 --Definition Base-JointsTrajectoryP starts
-Base-JointsTrajectoryP{T-UInt32: maxBase-JointsTrajectory-names, T-UInt32: maxBase-JointsTrajectory-elements, T-UInt32: maxBase-JointsTrajectory-times} ::= SEQUENCE
+Base-JointsTrajectoryP{T-UInt32: maxBase-JointsTrajectory-names, T-UInt32: maxBase-JointsTrajectory-elements, T-UInt32: maxBase-JointsTrajectory-times-t} ::= SEQUENCE
 {
     names  SEQUENCE (SIZE(1..maxBase-JointsTrajectory-names)) OF T-String,
     elements  SEQUENCE (SIZE(1..maxBase-JointsTrajectory-elements)) OF Base-JointTrajectory,
-    times  SEQUENCE (SIZE(1..maxBase-JointsTrajectory-times)) OF Base-Time
+    times-t  SEQUENCE (SIZE(1..maxBase-JointsTrajectory-times-t)) OF Base-Time
 }
 -- Definition Base-JointsTrajectoryP ends
 
 --Definition Base-JointsTrajectory starts
-Base-JointsTrajectory ::= Base-JointsTrajectoryP{numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times}
+Base-JointsTrajectory ::= Base-JointsTrajectoryP{numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times-t}
 -- Definition Base-JointsTrajectory ends
 
 --Definition Base-NamedVector-Base-JointLimitRangeP starts
@@ -648,8 +648,8 @@ Base-samples-Wrenches ::= Base-samples-WrenchesP{numBase-samples-Wrenches-names,
 --Definition Base-samples-frame-frame-attrib-t starts
 Base-samples-frame-frame-attrib-t ::= SEQUENCE
 {
-    data-  T-String,
-    name-  T-String
+    data  T-String,
+    name-t  T-String
 }
 -- Definition Base-samples-frame-frame-attrib-t ends
 
@@ -684,7 +684,7 @@ Base-samples-frame-FrameP{T-UInt32: maxBase-samples-frame-Frame-image, T-UInt32:
     received-time  Base-Time,
     image  SEQUENCE (SIZE(1..maxBase-samples-frame-Frame-image)) OF T-UInt8,
     attributes  SEQUENCE (SIZE(1..maxBase-samples-frame-Frame-attributes)) OF Base-samples-frame-frame-attrib-t,
-    size  Base-samples-frame-frame-size-t,
+    size-t  Base-samples-frame-frame-size-t,
     data-depth  T-UInt32,
     pixel-size  T-UInt32,
     row-size  T-UInt32,
