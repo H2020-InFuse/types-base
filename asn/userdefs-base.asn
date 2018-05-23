@@ -1,15 +1,11 @@
-UserDefs-Types DEFINITIONS ::=
+UserDefs-Base-Types DEFINITIONS ::=
 BEGIN
 
 IMPORTS T-UInt32 FROM TASTE-BasicTypes;
 
---Definition Dummy-T starts
-    Dummy-T ::= T-UInt32
--- Definition Dummy-T ends
-
---Definition numT-String starts
-    numT-String	T-UInt32 ::= 200 
--- Definition numT-String ends
+--Definition DummyBase-T starts
+    DummyBase-T ::= T-UInt32
+-- Definition DummyBase-T ends
 
 --Definition numBase-JointTrajectory starts
     numBase-JointTrajectory	T-UInt32 ::= 200 

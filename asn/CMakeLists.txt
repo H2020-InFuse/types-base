@@ -6,7 +6,7 @@ esrocos_asn1_types_package(esrocos_types_base
         base.asn        
         taste-extended.asn  
         taste-types.asn
-        userdefs.asn
+        userdefs-base.asn
         )
 
 esrocos_asn1_types_build_test(esrocos_types_base)
