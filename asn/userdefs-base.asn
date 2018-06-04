@@ -47,9 +47,9 @@ IMPORTS T-UInt32 FROM TASTE-BasicTypes;
     numBase-JointsTrajectory-elements	T-UInt32 ::= 200 
 -- Definition numBase-JointsTrajectory-elements ends
 
---Definition numBase-JointsTrajectory-times-t starts
-    numBase-JointsTrajectory-times-t	T-UInt32 ::= 200 
--- Definition numBase-JointsTrajectory-times-t ends
+--Definition numBase-JointsTrajectory-times-val starts
+    numBase-JointsTrajectory-times-val	T-UInt32 ::= 200 
+-- Definition numBase-JointsTrajectory-times-val ends
 
 --Definition numBase-NamedVector-Base-JointLimitRange-names starts
     numBase-NamedVector-Base-JointLimitRange-names	T-UInt32 ::= 200 
