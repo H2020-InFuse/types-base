@@ -1,7 +1,7 @@
 Base-Types DEFINITIONS ::=
 BEGIN
 
-IMPORTS DummyBase-T, numBase-JointTrajectory, numStd-orogen-typekits-mtype-std-vector-base-JointTransform, numStd-orogen-typekits-mtype-std-vector-base-Waypoint, numStd-orogen-typekits-mtype-std-vector-base-Wrench, numStd-vector-Wrappers-Vector4d, numStd-orogen-typekits-mtype-std-vector-base-Trajectory, numBase-JointLimits-names, numBase-JointLimits-elements, numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times-val, numBase-NamedVector-Base-JointLimitRange-names, numBase-NamedVector-Base-JointLimitRange-elements, numBase-NamedVector-Base-JointState-names, numBase-NamedVector-Base-Wrench-names, numBase-NamedVector-Base-Wrench-elements, numBase-NamedVector-Base-JointTrajectory-names, numBase-NamedVector-Base-JointTrajectory-elements, numBase-samples-DepthMap-timestamps, numBase-samples-DepthMap-vertical-interval, numBase-samples-DepthMap-horizontal-interval, numBase-samples-DepthMap-distances, numBase-samples-DepthMap-remissions, numBase-samples-DistanceImage-data, numBase-commands-Joints-names, numBase-samples-LaserScan-ranges, numBase-samples-LaserScan-remission, numBase-samples-Pointcloud-points, numBase-samples-Pointcloud-colors, numBase-samples-Sonar-timestamps, numBase-samples-Sonar-bearings, numBase-samples-Sonar-bins, numBase-samples-SonarBeam-beam, numBase-samples-SonarScan-data, numBase-samples-SonarScan-time-beams, numBase-samples-Wrenches-names, numBase-samples-Wrenches-elements, numBase-JointTransformVector-names, numBase-JointTransformVector-elements, numBase-NamedVector-Base-JointTransform-names, numBase-NamedVector-Base-JointTransform-elements, numBase-samples-frame-Frame-image, numBase-samples-frame-Frame-attributes, numWrappers-MatrixXd-data, numWrappers-VectorXd-data, numBase-JointTransformVector-m-names, numBase-NamedVector-base-JointTransform-m-names, numBase-NamedVector-base-Wrench-m-names, numBase-samples-Pointcloud-m-points, numBase-samples-Pointcloud-m-colors, numBase-samples-Wrenches-m-names, numWrappers-geometry-Spline-knots, numWrappers-geometry-Spline-vertices FROM UserDefs-Base-Types T-Double, T-Float, T-Int64, T-UInt16, T-String FROM TASTE-ExtendedTypes T-UInt32, T-Boolean, T-Int32 FROM TASTE-BasicTypes;
+IMPORTS T-UInt32, T-Boolean, T-Int32 FROM TASTE-BasicTypes T-Double, T-Float, T-Int64, T-UInt16, T-String FROM TASTE-ExtendedTypes DummyBase-T, numBase-JointTrajectory, numStd-orogen-typekits-mtype-std-vector-base-JointTransform, numStd-orogen-typekits-mtype-std-vector-base-Waypoint, numStd-orogen-typekits-mtype-std-vector-base-Wrench, numStd-vector-Wrappers-Vector4d, numStd-orogen-typekits-mtype-std-vector-base-Trajectory, numBase-JointLimits-names, numBase-JointLimits-elements, numBase-JointsTrajectory-names, numBase-JointsTrajectory-elements, numBase-JointsTrajectory-times-val, numBase-NamedVector-Base-JointLimitRange-names, numBase-NamedVector-Base-JointLimitRange-elements, numBase-NamedVector-Base-JointState-names, numBase-NamedVector-Base-Wrench-names, numBase-NamedVector-Base-Wrench-elements, numBase-NamedVector-Base-JointTrajectory-names, numBase-NamedVector-Base-JointTrajectory-elements, numBase-samples-DepthMap-timestamps, numBase-samples-DepthMap-vertical-interval, numBase-samples-DepthMap-horizontal-interval, numBase-samples-DepthMap-distances, numBase-samples-DepthMap-remissions, numBase-samples-DistanceImage-data, numBase-commands-Joints-names, numBase-samples-LaserScan-ranges, numBase-samples-LaserScan-remission, numBase-samples-Pointcloud-points, numBase-samples-Pointcloud-colors, numBase-samples-Sonar-timestamps, numBase-samples-Sonar-bearings, numBase-samples-Sonar-bins, numBase-samples-SonarBeam-beam, numBase-samples-SonarScan-data, numBase-samples-SonarScan-time-beams, numBase-samples-Wrenches-names, numBase-samples-Wrenches-elements, numBase-JointTransformVector-names, numBase-JointTransformVector-elements, numBase-NamedVector-Base-JointTransform-names, numBase-NamedVector-Base-JointTransform-elements, numBase-samples-frame-Frame-image, numBase-samples-frame-Frame-attributes, numWrappers-MatrixXd-data, numWrappers-VectorXd-data, numBase-JointTransformVector-m-names, numBase-NamedVector-base-JointTransform-m-names, numBase-NamedVector-base-Wrench-m-names, numBase-samples-Pointcloud-m-points, numBase-samples-Pointcloud-m-colors, numBase-samples-Wrenches-m-names, numWrappers-geometry-Spline-knots, numWrappers-geometry-Spline-vertices FROM UserDefs-Base-Types;
 
 --Definition Dummy2Base-T starts
     Dummy2Base-T ::= DummyBase-T
@@ -10,121 +10,121 @@ IMPORTS DummyBase-T, numBase-JointTrajectory, numStd-orogen-typekits-mtype-std-v
 --Definition Base-JointState-MODE starts
 Base-JointState-MODE ::= ENUMERATED
 {
-    acceleration,
-    effort,
-    position,
-    raw,
-    speed,
-    unset
+    base-jointstate-mode-acceleration,
+    base-jointstate-mode-effort,
+    base-jointstate-mode-position,
+    base-jointstate-mode-raw,
+    base-jointstate-mode-speed,
+    base-jointstate-mode-unset
 }
 -- Definition Base-JointState-MODE ends
 
 --Definition Base-Time-Resolution starts
 Base-Time-Resolution ::= ENUMERATED
 {
-    microseconds,
-    milliseconds,
-    seconds
+    base-time-resolution-microseconds,
+    base-time-resolution-milliseconds,
+    base-time-resolution-seconds
 }
 -- Definition Base-Time-Resolution ends
 
 --Definition Base-geometry-SplineBase-CoordinateType starts
 Base-geometry-SplineBase-CoordinateType ::= ENUMERATED
 {
-    derivative-to-next,
-    derivative-to-prior,
-    knuckle-point,
-    ordinary-point,
-    second-derivative-to-next,
-    second-derivative-to-prior,
-    tangent-point-for-next,
-    tangent-point-for-prior
+    base-geometry-splinebase-coordinatetype-derivative-to-next,
+    base-geometry-splinebase-coordinatetype-derivative-to-prior,
+    base-geometry-splinebase-coordinatetype-knuckle-point,
+    base-geometry-splinebase-coordinatetype-ordinary-point,
+    base-geometry-splinebase-coordinatetype-second-derivative-to-next,
+    base-geometry-splinebase-coordinatetype-second-derivative-to-prior,
+    base-geometry-splinebase-coordinatetype-tangent-point-for-next,
+    base-geometry-splinebase-coordinatetype-tangent-point-for-prior
 }
 -- Definition Base-geometry-SplineBase-CoordinateType ends
 
 --Definition Base-samples-DepthMap-DEPTH-MEASUREMENT-STATE starts
 Base-samples-DepthMap-DEPTH-MEASUREMENT-STATE ::= ENUMERATED
 {
-    measurement-error,
-    too-far,
-    too-near,
-    valid-measurement
+    base-samples-depthmap-depth-measurement-state-measurement-error,
+    base-samples-depthmap-depth-measurement-state-too-far,
+    base-samples-depthmap-depth-measurement-state-too-near,
+    base-samples-depthmap-depth-measurement-state-valid-measurement
 }
 -- Definition Base-samples-DepthMap-DEPTH-MEASUREMENT-STATE ends
 
 --Definition Base-samples-DepthMap-PROJECTION-TYPE starts
 Base-samples-DepthMap-PROJECTION-TYPE ::= ENUMERATED
 {
-    planar,
-    polar
+    base-samples-depthmap-projection-type-planar,
+    base-samples-depthmap-projection-type-polar
 }
 -- Definition Base-samples-DepthMap-PROJECTION-TYPE ends
 
 --Definition Base-samples-DepthMap-UNIT-AXIS starts
 Base-samples-DepthMap-UNIT-AXIS ::= ENUMERATED
 {
-    unit-x,
-    unit-y,
-    unit-z
+    base-samples-depthmap-unit-axis-unit-x,
+    base-samples-depthmap-unit-axis-unit-y,
+    base-samples-depthmap-unit-axis-unit-z
 }
 -- Definition Base-samples-DepthMap-UNIT-AXIS ends
 
 --Definition Base-samples-LASER-RANGE-ERRORS starts
 Base-samples-LASER-RANGE-ERRORS ::= ENUMERATED
 {
-    end-laser-range-errors,
-    max-range-error,
-    measurement-error,
-    other-range-errors,
-    too-far,
-    too-near
+    base-samples-laser-range-errors-end-laser-range-errors,
+    base-samples-laser-range-errors-max-range-error,
+    base-samples-laser-range-errors-measurement-error,
+    base-samples-laser-range-errors-other-range-errors,
+    base-samples-laser-range-errors-too-far,
+    base-samples-laser-range-errors-too-near
 }
 -- Definition Base-samples-LASER-RANGE-ERRORS ends
 
 --Definition Base-samples-frame-frame-mode-t starts
 Base-samples-frame-frame-mode-t ::= ENUMERATED
 {
-    compressed-modes,
-    mode-bayer,
-    mode-bayer-bggr,
-    mode-bayer-gbrg,
-    mode-bayer-grbg,
-    mode-bayer-rggb,
-    mode-bgr,
-    mode-grayscale,
-    mode-jpeg,
-    mode-pjpg,
-    mode-png,
-    mode-rgb,
-    mode-rgb32,
-    mode-undefined,
-    mode-uyvy,
-    raw-modes
+    base-samples-frame-frame-mode-t-compressed-modes,
+    base-samples-frame-frame-mode-t-mode-bayer,
+    base-samples-frame-frame-mode-t-mode-bayer-bggr,
+    base-samples-frame-frame-mode-t-mode-bayer-gbrg,
+    base-samples-frame-frame-mode-t-mode-bayer-grbg,
+    base-samples-frame-frame-mode-t-mode-bayer-rggb,
+    base-samples-frame-frame-mode-t-mode-bgr,
+    base-samples-frame-frame-mode-t-mode-grayscale,
+    base-samples-frame-frame-mode-t-mode-jpeg,
+    base-samples-frame-frame-mode-t-mode-pjpg,
+    base-samples-frame-frame-mode-t-mode-png,
+    base-samples-frame-frame-mode-t-mode-rgb,
+    base-samples-frame-frame-mode-t-mode-rgb32,
+    base-samples-frame-frame-mode-t-mode-undefined,
+    base-samples-frame-frame-mode-t-mode-uyvy,
+    base-samples-frame-frame-mode-t-raw-modes
 }
 -- Definition Base-samples-frame-frame-mode-t ends
 
 --Definition Base-samples-frame-frame-status-t starts
 Base-samples-frame-frame-status-t ::= ENUMERATED
 {
-    status-empty,
-    status-invalid,
-    status-valid
+    base-samples-frame-frame-status-t-status-empty,
+    base-samples-frame-frame-status-t-status-invalid,
+    base-samples-frame-frame-status-t-status-valid
 }
 -- Definition Base-samples-frame-frame-status-t ends
 
 --Definition Wrappers-geometry-SplineType starts
 Wrappers-geometry-SplineType ::= ENUMERATED
 {
-    degenerate,
-    polynomial-bezier,
-    polynomial-bspline,
-    rational-bezier,
-    rational-bspline
+    wrappers-geometry-splinetype-degenerate,
+    wrappers-geometry-splinetype-polynomial-bezier,
+    wrappers-geometry-splinetype-polynomial-bspline,
+    wrappers-geometry-splinetype-rational-bezier,
+    wrappers-geometry-splinetype-rational-bspline
 }
 -- Definition Wrappers-geometry-SplineType ends
 
 --Definition Base-JointTrajectoryP starts
-Base-JointTrajectoryP {T-UInt16: maxBase-JointTrajectory} ::= SEQUENCE(SIZE(1..maxBase-JointTrajectory)) OF Base-JointState
+Base-JointTrajectoryP {T-UInt32: maxBase-JointTrajectory} ::= SEQUENCE(SIZE(1..maxBase-JointTrajectory)) OF Base-JointState
 -- Definition Base-JointTrajectoryP ends
 
 --Definition Base-JointTrajectory starts
@@ -132,7 +132,7 @@ Base-JointTrajectory ::= Base-JointTrajectoryP{numBase-JointTrajectory}
 -- Definition Base-JointTrajectory ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-JointTransformP starts
-Std-orogen-typekits-mtype-std-vector-base-JointTransformP {T-UInt16: maxStd-orogen-typekits-mtype-std-vector-base-JointTransform} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-JointTransform)) OF Base-JointTransform-m
+Std-orogen-typekits-mtype-std-vector-base-JointTransformP {T-UInt32: maxStd-orogen-typekits-mtype-std-vector-base-JointTransform} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-JointTransform)) OF Base-JointTransform-m
 -- Definition Std-orogen-typekits-mtype-std-vector-base-JointTransformP ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-JointTransform starts
@@ -140,7 +140,7 @@ Std-orogen-typekits-mtype-std-vector-base-JointTransform ::= Std-orogen-typekits
 -- Definition Std-orogen-typekits-mtype-std-vector-base-JointTransform ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-WaypointP starts
-Std-orogen-typekits-mtype-std-vector-base-WaypointP {T-UInt16: maxStd-orogen-typekits-mtype-std-vector-base-Waypoint} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Waypoint)) OF Base-Waypoint-m
+Std-orogen-typekits-mtype-std-vector-base-WaypointP {T-UInt32: maxStd-orogen-typekits-mtype-std-vector-base-Waypoint} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Waypoint)) OF Base-Waypoint-m
 -- Definition Std-orogen-typekits-mtype-std-vector-base-WaypointP ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-Waypoint starts
@@ -148,7 +148,7 @@ Std-orogen-typekits-mtype-std-vector-base-Waypoint ::= Std-orogen-typekits-mtype
 -- Definition Std-orogen-typekits-mtype-std-vector-base-Waypoint ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-WrenchP starts
-Std-orogen-typekits-mtype-std-vector-base-WrenchP {T-UInt16: maxStd-orogen-typekits-mtype-std-vector-base-Wrench} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Wrench)) OF Base-Wrench-m
+Std-orogen-typekits-mtype-std-vector-base-WrenchP {T-UInt32: maxStd-orogen-typekits-mtype-std-vector-base-Wrench} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Wrench)) OF Base-Wrench-m
 -- Definition Std-orogen-typekits-mtype-std-vector-base-WrenchP ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-Wrench starts
@@ -156,7 +156,7 @@ Std-orogen-typekits-mtype-std-vector-base-Wrench ::= Std-orogen-typekits-mtype-s
 -- Definition Std-orogen-typekits-mtype-std-vector-base-Wrench ends
 
 --Definition Std-vector-Wrappers-Vector4dP starts
-Std-vector-Wrappers-Vector4dP {T-UInt16: maxStd-vector-Wrappers-Vector4d} ::= SEQUENCE(SIZE(1..maxStd-vector-Wrappers-Vector4d)) OF Wrappers-Vector4d
+Std-vector-Wrappers-Vector4dP {T-UInt32: maxStd-vector-Wrappers-Vector4d} ::= SEQUENCE(SIZE(1..maxStd-vector-Wrappers-Vector4d)) OF Wrappers-Vector4d
 -- Definition Std-vector-Wrappers-Vector4dP ends
 
 --Definition Std-vector-Wrappers-Vector4d starts
@@ -164,7 +164,7 @@ Std-vector-Wrappers-Vector4d ::= Std-vector-Wrappers-Vector4dP{numStd-vector-Wra
 -- Definition Std-vector-Wrappers-Vector4d ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-TrajectoryP starts
-Std-orogen-typekits-mtype-std-vector-base-TrajectoryP {T-UInt16: maxStd-orogen-typekits-mtype-std-vector-base-Trajectory} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Trajectory)) OF Base-Trajectory-m
+Std-orogen-typekits-mtype-std-vector-base-TrajectoryP {T-UInt32: maxStd-orogen-typekits-mtype-std-vector-base-Trajectory} ::= SEQUENCE(SIZE(1..maxStd-orogen-typekits-mtype-std-vector-base-Trajectory)) OF Base-Trajectory-m
 -- Definition Std-orogen-typekits-mtype-std-vector-base-TrajectoryP ends
 
 --Definition Std-orogen-typekits-mtype-std-vector-base-Trajectory starts
